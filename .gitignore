@@ -155,5 +155,5 @@ dmypy.json
 .vscode
 
 ## Native data sets
-data/2019-12-04/Solver*
-data/2019-12-04/*.csv
+data/**/Solver*
+data/**/*.csv
