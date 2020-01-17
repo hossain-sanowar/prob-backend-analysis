@@ -23,7 +23,7 @@ carried out our evaluations.
 ### Data
 
 In the `data` directory, you will find *.zip files containing
-data sets for each backend, `prob`, `kodkod`, and `z3`.
+data sets for each backend: `prob`, `kodkod`, and `z3`.
 
 For each backend, six files exists:
 each of the feature sets F17, F185, and F275
