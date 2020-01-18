@@ -32,6 +32,7 @@ def extract_rules(forest, max_depth=None):
         all_rules[tree] = tree_rules
     return all_rules
 
+
 def rule_extract_(tree, rule_set, current_node, rule_head):
     """
     Implementation of `ruleExtract(ruleSet, currentNote, C)` from the paper.
