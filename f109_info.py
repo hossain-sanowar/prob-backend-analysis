@@ -45,7 +45,7 @@ def f109_name(index):
         41: "Set inclusions per conjunct",
         42: "Set operations per conjunct",
         43: "Set comprehensions per conjunct",
-        44: "Set memberships per set inclusion op",
+        44: "Set memberships ratio of set inclusion ops",
         45: "Negative set memberships per set inclusion op",
         46: "Subsets per set inclusion op",
         47: "Strict subsets per set inclusion op",

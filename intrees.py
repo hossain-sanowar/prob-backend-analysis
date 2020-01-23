@@ -121,31 +121,62 @@ def rule_length(tree, rule):
     (rule_cond, _) = rule
     return len(rule_cond)
 
-
-def association_rule_analysis(rule, rule_set):
+def analyse_rule_set(rule_set, max_depth=None):
     """
-    Returns a triple: The support, the confidence, and length of the
-    given rule.
+    Calculates the support and confidence for each rule in the rule set.
+
+    Returns a list of tuples `(cond, target, support, confidence)`
+    in no guaranteed order.
+    """
+    analysis = []
+
+    sorted_rules = sorted(rule_set, key=lambda r: 1/len(r[0]))
+    supp_div = len(sorted_rules)
+
+    for i in range(len(sorted_rules)):
+        rule = sorted_rules[i]
+        (support, confidence) = association_rule_analysis(rule, sorted_rules[i+1:], max_depth=max_depth)
+        (cond, out) = rule_to_assoc_rule(rule, max_depth=max_depth)
+        analysis += [(cond, out, support/supp_div, confidence)]
+        print("%.02f%%" % (100*(i+1)/supp_div))
+    return analysis
+
+
+def association_rule_analysis(rule, rule_set, max_depth=None):
+    """
+    Returns a tuple: amount of supporting rules and the confidence.
     """
     support = 0
-    supp_c = 0
-
     confidence = 0
-    conf_c = 0
 
-    (rule_cond, rule_target) = rule
-    assoc_rule_cond = association_rule_cond(rule_cond)
-    for tree in rule_set:
-        for (cond, t) in rule_set[tree]:
-            supp_c += 1
-            if assoc_rule_cond.issubset(association_rule_cond(cond)):
-                support += 1
-                conf_c += 1
-                if t == rule_target:
-                    confidence += 1
-    return (support/supp_c, confidence/conf_c, rule_length(None, rule))
+    rule_list = list(rule_set)
 
-def association_rule_cond(cond):
+    (this_cond, this_target) = rule_to_assoc_rule(rule, max_depth)
+
+    for (other_cond, t) in rule_set:
+        if this_cond.issubset(association_rule_cond(other_cond)):
+            support += 1
+            if t == this_target:
+                confidence += 1
+    return (support, confidence/support if confidence > 0 else 0)
+
+
+def rule_to_assoc_rule(rule, max_depth=None):
+    """
+    Translates a rule into an association rule.
+    This returns a tuple `(cond, target)`
+    where `cond` is a set of tuples `(feature, leq)`
+    with `leq` indicating whether the path used was into the left subtree or
+    not.
+
+    By setting a `max_depth=n` value,
+    only the first `n` decisions in the rule are considered.
+    """
+    (cond, target) = rule
+    return (association_rule_cond(cond, max_depth), target)
+
+
+def association_rule_cond(cond, max_depth=None):
     """
     Extracts the condition of a rule as association rule condition.
     For this, the condition is additionally turned into a set.
@@ -154,8 +185,12 @@ def association_rule_cond(cond):
     `(feature_id, less_or_equal_threshold)`.
     """
     transformed_cond_list = []
+    depth = 0
     for (_, id, _, leq) in cond:
         transformed_cond_list += [(id, leq)]
+        depth += 1
+        if max_depth != None and max_depth <= depth:
+            break
     return set(transformed_cond_list)
 
 
