@@ -83,6 +83,7 @@ def run_analysis(csv_file_path, target_dir='./'):
         rule_list += [(c,o) for (c,o) in extracted_rules[tree]]
     sorted_rule_list = sorted(rule_list, key=lambda r: len(r[0])) # Sorted rules by length
 
+    md = open(target_dir+'/assoc_rule_overview.md', 'w+')
     md.write("# Listing of rules found by association rule analysis\n")
     md.write("\n")
     md.write("This list is sorted by descending support and confidence values.\n")
@@ -96,8 +97,6 @@ def run_analysis(csv_file_path, target_dir='./'):
     dat = open(target_dir+'/assoc_rules.dat', 'wb')
     pickle.dump(annotated_rules, dat)
     dat.close()
-
-    md = open(target_dir+'/assoc_rule_overview.md', 'w+')
 
     seen = set([])
     for (cond, out, supp, conf) in sorted(annotated_rules, key=lambda r: (1/(r[2]+1), 1/(r[3]+1))):
