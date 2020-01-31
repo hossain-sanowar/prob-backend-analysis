@@ -8,6 +8,8 @@ The code is meant to be used on tree ensembles produced by Scikit-Learn.
     https://doi.org/10.1007/s41060-018-0144-8
 """
 
+from f109_info import *
+
 def extract_rules(forest, max_depth=None):
     """
     Extracts the rules of a random forest as a tuple `(condition, target)`.
@@ -135,11 +137,33 @@ def analyse_rule_set(rule_set, max_depth=None):
 
     for i in range(len(sorted_rules)):
         rule = sorted_rules[i]
-        (support, confidence) = association_rule_analysis(rule, sorted_rules[i+1:], max_depth=max_depth)
-        (cond, out) = rule_to_assoc_rule(rule, max_depth=max_depth)
-        analysis += [(cond, out, support/supp_div, confidence)]
+        analysis += [analyse_rule_in_ruleset(rule, sorted_rules[i+1:], max_depth)]
         print("%.02f%%" % (100*(i+1)/supp_div))
     return analysis
+
+def analyse_rule_in_ruleset(rule, rule_set, max_depth=None, file=None, importances=None):
+    print("Analysing rule", rule)
+    (support_score, confidence) = association_rule_analysis(rule, rule_set, max_depth=max_depth)
+    (cond, out) = rule_to_assoc_rule(rule, max_depth=max_depth)
+    print("Done with rule", rule, "- Support, confidence:", (support_score, confidence))
+
+    if not (file is None or importances is None):
+        w = open(file, "w+")
+        pretty_print_assoc_rule((cond, out), importances, w)
+        w.write('Support: %d, Confidence: %.2f\n\n' % (support_score, confidence))
+        w.close()
+
+    return [cond, out, support_score, confidence]
+
+
+def pretty_print_assoc_rule(rule, importances, target_file):
+    (cond, target) = rule
+    for c in sorted(cond, key=lambda x: 1/importances[x[0]]):
+        fid, leq = c
+        target_file.write(f109_name(fid))
+        target_file.write(" (low)" if leq else " (**high**)")
+        target_file.write(", importance: %.2f\n" % importances[fid])
+    target_file.write("=> %d\n" % target)
 
 
 def association_rule_analysis(rule, rule_set, max_depth=None):
