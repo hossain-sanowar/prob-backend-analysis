@@ -25,6 +25,20 @@ def extract_support(file):
         print("DID NOT FIND SUPPORT VALUE FOR", str(file))
 
 
+def equal_rule(rule, other):
+    last_text = ""
+    for line in rule.split('\n'):
+        if line.startswith("=>"):
+            break
+        last_text += line
+    other_text = ""
+    for line in other.split('\n'):
+        if line.startswith("=>"):
+            break
+        other_text += line
+    return last_text == other_text
+
+
 
 if __name__ == "__main__":
     jobarray_dir = Path(sys.argv[1])
@@ -45,7 +59,12 @@ if __name__ == "__main__":
 
     # Dump into target file
     with open(target_file, 'w+') as dump:
+        last_read = ""
         for (rule, support) in sorted_rules:
             if support <= 0: continue # Skipping unsupported rules.
             with open(rule, 'r+') as f:
-                dump.write(f.read())
+                this_read = f.read()
+                if equal_rule(last_read, this_read):
+                    continue
+                dump.write(this_read)
+                last_read = this_read
