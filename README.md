@@ -1,9 +1,9 @@
 # ProB Backend Analysis
 
 This repository contains the actual analysis notebooks used for the paper
-"Analysing the Backends of ProB:
+"Analysing ProB's Constraint Solving Backends:
   What do they know? Do they know things? Let's find out!"
-to be submitted at the ABZ 2020.
+submitted at the [ABZ 2020](https://abz2020.uni-ulm.de/).
 
 ## Repo Outline
 
@@ -16,9 +16,27 @@ On the top level, you will find the respective Python Notebooks in which we
 carried out our evaluations.
 
 * [`prob_f275-analysis.ipynb`](prob_f275-analysis.ipynb):
-  Contains the analysis of the F275 feature set over whether
+  Contains the analysis of the F275 feature set from previous work over whether
   ProB can find an answer to a given predicate or returns unknown
   (i.e. timeouts).
+* [`prob_f109-analysis.ipynb`](prob_f109-analysis.ipynb):
+  Contains the analysis of the F109 feature set over whether
+  ProB can find an answer to a given predicate or returns unknown
+  (i.e. timeouts).
+* [`kodkod_f109-analysis.ipynb`](kodkod_f109-analysis.ipynb):
+  Contains the analysis of the F109 feature set over whether
+  Kodkod can find an answer to a given predicate or returns unknown
+  (i.e. timeouts).
+* [`z3_f109-analysis.ipynb`](z3_f109-analysis.ipynb):
+  Contains the analysis of the F109 feature set over whether
+  Z3 can find an answer to a given predicate or returns unknown
+  (i.e. timeouts).
+* The [`results`](results) directory contains the aggregated association rules
+  collected over each backend's corresponding random forest.
+  These are the 250,000 shortest rules found in the forests,
+  for which support and confidence were calculated.
+  Due to removing duplicates, the result files do not actually
+  contain 250,000 rules each.
 
 ### Data
 
