@@ -23,14 +23,12 @@ carried out our evaluations.
   Contains the analysis of the F109 feature set over whether
   ProB can find an answer to a given predicate or returns unknown
   (i.e. timeouts).
-* [`kodkod-f109-analysis.ipynb`](kodkod-f109-analysis.ipynb):
-  Contains the analysis of the F109 feature set over whether
-  Kodkod can find an answer to a given predicate or returns unknown
-  (i.e. timeouts).
-* [`z3-f109-analysis.ipynb`](z3-f109-analysis.ipynb):
-  Contains the analysis of the F109 feature set over whether
-  Z3 can find an answer to a given predicate or returns unknown
-  (i.e. timeouts).
+* [`prob-f109-lto-analysis.ipynb`](prob-f109-lto-analysis.ipynb):
+  Contains the analysis of the F109 feature set on a higher timeout (25 sec) for ProB's default backend.
+* [`kodkod-f109-lto-analysis.ipynb`](kodkod-f109-lto-analysis.ipynb):
+  Contains the analysis of the F109 feature set on a higher timeout (25 sec) for the Kodkod backend.
+* [`z3-f109-lto-analysis.ipynb`](z3-f109-lto-analysis.ipynb):
+  Contains the analysis of the F109 feature set on a higher timeout (25 sec) for the Z3 backend.
 * The [`results`](results) directory contains the aggregated association rules
   collected over each backend's corresponding random forest.
   These are the 250,000 shortest rules found in the forests,
