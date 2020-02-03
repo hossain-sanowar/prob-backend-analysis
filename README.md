@@ -15,19 +15,19 @@ containing the data used for the analysis.
 On the top level, you will find the respective Python Notebooks in which we
 carried out our evaluations.
 
-* [`prob_f275-analysis.ipynb`](prob_f275-analysis.ipynb):
+* [`prob-f275-analysis.ipynb`](prob-f275-analysis.ipynb):
   Contains the analysis of the F275 feature set from previous work over whether
   ProB can find an answer to a given predicate or returns unknown
   (i.e. timeouts).
-* [`prob_f109-analysis.ipynb`](prob_f109-analysis.ipynb):
+* [`prob-f109-analysis.ipynb`](prob-f109-analysis.ipynb):
   Contains the analysis of the F109 feature set over whether
   ProB can find an answer to a given predicate or returns unknown
   (i.e. timeouts).
-* [`kodkod_f109-analysis.ipynb`](kodkod_f109-analysis.ipynb):
+* [`kodkod-f109-analysis.ipynb`](kodkod-f109-analysis.ipynb):
   Contains the analysis of the F109 feature set over whether
   Kodkod can find an answer to a given predicate or returns unknown
   (i.e. timeouts).
-* [`z3_f109-analysis.ipynb`](z3_f109-analysis.ipynb):
+* [`z3-f109-analysis.ipynb`](z3-f109-analysis.ipynb):
   Contains the analysis of the F109 feature set over whether
   Z3 can find an answer to a given predicate or returns unknown
   (i.e. timeouts).
