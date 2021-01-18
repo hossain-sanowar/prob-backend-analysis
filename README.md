@@ -1,9 +1,8 @@
 # ProB Backend Analysis
 
 This repository contains the actual analysis notebooks used for the paper
-"Analysing ProB's Constraint Solving Backends:
-  What do they know? Do they know things? Let's find out!"
-submitted at the [ABZ 2020](https://abz2020.uni-ulm.de/).
+"[Analysing ProB's Constraint Solving Backends: What do they know? Do they know things? Let's find out!](https://doi.org/10.1007/978-3-030-48077-6_8)"
+submitted to [ABZ 2020](https://abz2020.uni-ulm.de/).
 
 ## Repo Outline
 
@@ -59,3 +58,23 @@ is present in two collections with different suffixes:
 The data used for this experiments was taken from the
 [Satisfiability Overview of Predicates for ProB Backends](https://github.com/hhu-stups/prob-examples-metadata/tree/master/b-predicates)
 compiled in earlier work.
+
+## Paper
+
+The final authenticated version is freely available online at [Springer Link](https://link.springer.com/chapter/10.1007%2F978-3-030-48077-6_8).
+If you plan on referencing this work, please use the following BibTex entry:
+
+```bibtex
+@inproceedings{dunkelau2020analysing,
+  author={Dunkelau, Jannik and Schmidt, Joshua and Leuschel, Michael},
+  title={Analysing {ProB}'s Constraint Solving Backends: What Do They Know? Do They Know Things? Let's Find Out!},
+  booktitle={Rigorous State-Based Methods},
+  series={LNCS},
+  volume={12071},
+  pages={107--123},
+  year=2020,
+  month=may,
+  publisher={Springer},
+  doi={10.1007/978-3-030-48077-6\_8}
+}
+```
